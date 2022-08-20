@@ -1,0 +1,39 @@
+{{>header}}
+{{>articleNavbar}}
+<div class="container mt-5">
+<div class="card p-3 mt-2">
+  <div class="card-body">
+    <h5 class="card-title">{{article.title}}</h5>
+    <p class="card-text">{{article.content}}</p>
+  </div>
+</div>
+
+<form class="row g-3 mt-1 mb-3" method="post" action="/addComment/{{article._id}}">
+  <div class="col-auto">
+    <input type="text" class="form-control" name="name" placeholder="Name">
+  </div>
+  <div class="col-auto">
+    <input type="text" class="form-control" name="details" placeholder="Details">
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary">Add Comment</button>
+  </div>
+  {{#if errors}}
+  <div class="mt-4">
+    {{#if errors.name}}
+    <span class="alert alert-danger w-25">{{errors.name}}</span>
+    {{/if}}
+    {{#if errors.details}}
+    <span class="alert alert-danger w-25">{{errors.details}}</span>
+    {{/if}}
+  </div>
+  {{/if}}
+</form>
+{{#unless article.comments}}
+  <p class="bg-light p-2">No Comments Yet</p>
+{{/unless}}
+{{#each article.comments}}
+<p class="bg-light p-2 m-0"><span>{{this.name}}: </span><span>{{this.details}}</span></p>
+{{/each}}
+</div>
+{{>footer}}

@@ -1,0 +1,24 @@
+{{>header}}
+{{>articleNavbar}}
+{{#unless articles}}
+<div class="container mt-5">
+    <div class="card p-3 mt-5">
+      <div class="card-body">
+        <p class="card-text">No Articles Yet</p>
+      </div>
+    </div>
+</div>
+{{/unless}}
+<div class="d-flex justify-content-evenly flex-wrap mt-3">
+{{#each articles}}
+<div class="card p-3 mt-2">
+  <div class="card-body">
+    <h5 class="card-title">{{this.title}}</h5>
+    <p class="card-text">{{this.content}}</p>
+    <a href="/singleArticle/{{this._id}}" class="card-link btn btn-primary">View/Add Comments</a>
+    <a href="/deleteArticle/{{this._id}}" class="card-link btn btn-danger">Delete</a>
+  </div>
+</div>
+{{/each}}
+</div>
+{{>footer}}
